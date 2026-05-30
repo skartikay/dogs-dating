@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const LAUNCH_DATE = new Date('2026-05-30T00:00:00Z').getTime()
+const LAUNCH_DATE = new Date('2026-05-30T07:30:00Z').getTime() // 1pm IST = 7:30am UTC
 const START = 48
-const INTERVAL_MS = 20 * 60 * 1000 // 20 minutes
+const INTERVAL_MS = 35 * 60 * 1000 // 35 minutes
 
 // Deterministic pseudo-random using interval index as seed
 function seededRand(seed) {
