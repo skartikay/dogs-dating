@@ -1,5 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+
+const LAUNCH_DATE = new Date('2026-05-30T00:00:00Z').getTime()
+const START = 48
+const INTERVAL_MS = 20 * 60 * 1000 // 20 minutes
+
+// Deterministic pseudo-random using interval index as seed
+function seededRand(seed) {
+  const x = Math.sin(seed + 1) * 10000
+  return x - Math.floor(x)
+}
+
+function getCount() {
+  const intervals = Math.floor((Date.now() - LAUNCH_DATE) / INTERVAL_MS)
+  let count = START
+  for (let i = 0; i < intervals; i++) {
+    count += Math.floor(seededRand(i) * 9) + 8 // 8–16
+  }
+  return count
+}
 
 function DogCard({ className = '', style = {}, children }) {
   return (
@@ -14,6 +33,11 @@ function DogCard({ className = '', style = {}, children }) {
 
 export default function Hero({ onJoin }) {
   const [email, setEmail] = useState('')
+  const [count, setCount] = useState(START)
+
+  useEffect(() => {
+    setCount(getCount())
+  }, [])
 
   return (
     <section className="min-h-[calc(100vh-70px)] flex items-center px-[5%] py-16 relative overflow-hidden">
@@ -56,6 +80,21 @@ export default function Hero({ onJoin }) {
           <p className="text-sm text-grey font-bold">
             🔒 No spam, ever. Be among the <span className="text-coral">first dog parents</span> in your city!
           </p>
+
+          {/* Live counter */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+            className="mt-5 inline-flex items-center gap-3 bg-white border-2 border-orange-100 rounded-2xl px-4 py-2.5 shadow-sm"
+          >
+            <div className="flex -space-x-2">
+              {['🐶','🐕','🦮'].map((e, i) => (
+                <div key={i} className="w-7 h-7 rounded-full bg-orange-100 flex items-center justify-center text-sm border-2 border-white">{e}</div>
+              ))}
+            </div>
+            <p className="text-sm font-extrabold text-dark">
+              <span className="text-coral">{count.toLocaleString()} dog parents</span> already on the list — don't miss out! 🐾
+            </p>
+          </motion.div>
         </motion.div>
       </div>
 
