@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --coral: #FF6B6B;
+  --coral-light: #FF9090;
+  --mint: #4ECDC4;
+  --yellow: #FFE66D;
+  --purple: #C3B1E1;
+  --cream: #FFF8F0;
+  --white: #FFFFFF;
+  --dark: #2D2D2D;
+  --grey: #6B7280;
+  --shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+#root { width: 100%; }
+
+/* ── SHARED COMPONENTS ── */
+.btn-primary {
+  background: var(--coral);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(255,107,107,0.4);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,107,0.5); }
+.btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+/* ── FORM INPUTS ── */
+.mi {
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 2px solid #FFE0CC;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  outline: none;
+  background: var(--cream);
+  color: var(--dark);
+  transition: border 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.mi:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(255,107,107,0.15); }
+.mi.error { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(255,107,107,0.2); }
+
+.ms {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FF6B6B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.radio-opt {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px solid #FFE0CC;
+  background: var(--cream);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s;
+}
+.radio-opt:has(input:checked) { border-color: var(--coral); background: #FFF0E6; }
+.radio-opt input { accent-color: var(--coral); }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: #FFD0B0; border-radius: 3px; }
